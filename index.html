@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="
+        default-src 'self' data: gap: * 'unsafe-eval';
+        style-src 'self' * 'unsafe-inline';
+        font-src 'self' *;
+        media-src *;
+        script-src 'self' * 'unsafe-inline' 'unsafe-eval';
+      "
+    />
+    <link rel="stylesheet" href="all.min.css" />
+    <script src="all.min.js"></script>
+    <style>
+      body {
+        width: 300px;
+      }
+
+      input {
+        width: 100px;
+      }
+
+      #launchScript {
+        height: 30px;
+        width: 300px;
+        outline: none;
+        cursor: pointer;
+      }
+
+      .row {
+        display: inline;
+        width: 280px;
+      }
+
+      #deleteButton {
+        cursor: pointer;
+        width: 30px;
+        background: none;
+        border: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="row">
+      <h3>Shift:</h3>
+      <input
+        type="time"
+        name="appt"
+        id="input1"
+        min="00:00"
+        max="23:59"
+        value="09:00"
+        required
+      />
+      -
+      <input
+        type="time"
+        name="appt"
+        id="input2"
+        min="00:00"
+        max="23:59"
+        value="17:00"
+        required
+      />
+    </div>
+
+    <div class="row">
+      <br />
+      <br />
+      <label for="myCheckbox">Check if you want to edit past months:
+      <input type="checkbox" id="input13" ></label>
+      <input type="month" name="datetime" id="input14" value="" required />
+    </div>
+
+    </div>
+    <button id="launchScript" style="padding: 8px 16px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+      Fill report 
+    </button>
+    <script src="library.js"></script>
+    <p style="font-size: 8px; margin-top:2px;">Improved by Pablo, over the great work of Gerard Vilajuan with <3</p>
+  </body>
+</html>
+
