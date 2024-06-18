@@ -204,9 +204,10 @@ const main = async (mode, tab) => {
     let employee_id = await getEmployeeId(access_id);
     let period_id = await getPeriodId(employee_id);
     let days_to_fill = await getDaysToFill(employee_id);
+    console.log(days_to_fill);
     await fillDays(period_id, days_to_fill, employee_id);
     alert("Worked hours added correctly. Refreshing.");
-    chrome.tabs.create({ url: "https://app.factorialhr.com/attendance/clock-in/"+workYear+"/"+workMonth });
+    //chrome.tabs.create({ url: "https://app.factorialhr.com/attendance/clock-in/"+workYear+"/"+workMonth });
   } catch (error) {
     alert("error: " + error);
   }
@@ -220,7 +221,7 @@ const launchScript = () => {
 
 if (typeof document !== 'undefined') {
   document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("input14").value=currentYear+"-"+currentMonth;
+    document.getElementById("input14").value=currentYear+"-"+String(currentMonth).padStart(2, "0");;
     document
       .getElementById("launchScript")
       .addEventListener("click", launchScript);

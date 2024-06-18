@@ -1,8 +1,8 @@
 {
 "update_url": "https://clients2.google.com/service/update2/crx",
 
-    "name": "Refactorial",
-    "version": "2.0",
+    "name": "Refactorial By Pablo",
+    "version": "2.0.beta",
     "description": "Save time filling automatically your work report.",
     "manifest_version": 3,
     "action": {
