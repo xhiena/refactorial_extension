@@ -143,7 +143,7 @@ const getDaysToFill = async (employeeId) => {
     if (response.ok) {
       let arrayDates = [];
       const jsonResponse = await response.json();
-      console.log(jsonResponse)
+      //console.log(jsonResponse)
       jsonResponse.forEach((element) => {
         if (
           element.is_laborable &&
@@ -186,7 +186,7 @@ const fillDay = async (periodId, dayToFill, clockIn, clockOut, workable = true) 
       period_id: periodId,
       workable: workable
     });
-    console.log(bodytosend);
+    //console.log(bodytosend);
     const response = await fetch(factorialURL + "/attendance/shifts", {
       body: bodytosend,
       headers: {
@@ -207,7 +207,6 @@ const main = async (mode, tab) => {
     let employee_id = await getEmployeeId(access_id);
     let period_id = await getPeriodId(employee_id);
     let days_to_fill = await getDaysToFill(employee_id);
-    console.log(days_to_fill);
     await fillDays(period_id, days_to_fill, employee_id);
     alert("Worked hours added correctly. Refreshing.");
     chrome.tabs.create({ url: "https://app.factorialhr.com/attendance/clock-in/"+workYear+"/"+workMonth });
