@@ -143,7 +143,6 @@ const getDaysToFill = async (employeeId) => {
     if (response.ok) {
       let arrayDates = [];
       const jsonResponse = await response.json();
-      //console.log(jsonResponse)
       jsonResponse.forEach((element) => {
         if (
           element.is_laborable &&
@@ -186,7 +185,6 @@ const fillDay = async (periodId, dayToFill, clockIn, clockOut, workable = true) 
       period_id: periodId,
       workable: workable
     });
-    //console.log(bodytosend);
     const response = await fetch(factorialURL + "/attendance/shifts", {
       body: bodytosend,
       headers: {
