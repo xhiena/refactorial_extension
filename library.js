@@ -178,14 +178,17 @@ const fillDays = async (periodId, days, employeeId) => {
 
 const fillDay = async (periodId, dayToFill, clockIn, clockOut, workable = true) => {
   try {
+    bodytosend=JSON.stringify({
+      clock_in: clockIn,
+      clock_out: clockOut,
+      date: workYear+"-"+String(currentMonth).padStart(2, "0")+"-"+dayToFill,
+      day: dayToFill,
+      period_id: periodId,
+      workable: workable
+    });
+    console.log(bodytosend);
     const response = await fetch(factorialURL + "/attendance/shifts", {
-      body: JSON.stringify({
-        clock_in: clockIn,
-        clock_out: clockOut,
-        day: dayToFill,
-        period_id: periodId,
-        workable
-      }),
+      body: bodytosend,
       headers: {
         Accept: "application/json, text/plain, */*",
         "Content-Type": "application/json;charset=UTF-8",
@@ -207,7 +210,7 @@ const main = async (mode, tab) => {
     console.log(days_to_fill);
     await fillDays(period_id, days_to_fill, employee_id);
     alert("Worked hours added correctly. Refreshing.");
-    //chrome.tabs.create({ url: "https://app.factorialhr.com/attendance/clock-in/"+workYear+"/"+workMonth });
+    chrome.tabs.create({ url: "https://app.factorialhr.com/attendance/clock-in/"+workYear+"/"+workMonth });
   } catch (error) {
     alert("error: " + error);
   }
@@ -221,7 +224,7 @@ const launchScript = () => {
 
 if (typeof document !== 'undefined') {
   document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("input14").value=currentYear+"-"+String(currentMonth).padStart(2, "0");;
+    document.getElementById("input14").value=currentYear+"-"+String(currentMonth).padStart(2, "0");
     document
       .getElementById("launchScript")
       .addEventListener("click", launchScript);
