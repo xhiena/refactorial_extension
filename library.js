@@ -18,10 +18,10 @@ const setUrl = async (tab) => {
   const convertedMonth = parseInt(slot14.split('-')[1]);
   const convertedYear = parseInt(slot14.split('-')[0]);
   tab = tab || await chrome.tabs.query({ active: true, lastFocusedWindow: true });
-  tabURL = "https://app.factorialhr.com/attendance/clock-in/" + convertedYear + "/" + convertedMonth;
+  tabURL = "https://app.factorialhr.com/attendance/clock-in/monthly/" + convertedYear + "/" + convertedMonth;
   } else {
   tab = tab || await chrome.tabs.query({ active: true, lastFocusedWindow: true });
-  tabURL = "https://app.factorialhr.com/attendance/clock-in/" + currentYear + "/" + currentMonth;
+  tabURL = "https://app.factorialhr.com/attendance/clock-in/monthly/" + currentYear + "/" + currentMonth;
   }
 };
 
@@ -42,11 +42,11 @@ const getSlots = (mode) => {
 
 
 const setMonth = () => {
-  workMonth = tabURL.split("clock-in/")[1].split("/")[1];
+  workMonth = tabURL.split("clock-in/monthly/")[1].split("/")[1];
 };
 
 const setYear = () => {
-  workYear = tabURL.split("clock-in/")[1].split("/")[0];
+  workYear = tabURL.split("clock-in/monthly/")[1].split("/")[0];
 };
 
 const getData = async (mode, tab) => {
@@ -72,10 +72,14 @@ const getAccessId = async () => {
         }
       }
 
-      throw "Unable to find access id.";
+      throw "Unable to find access id.1";
+    } else{
+      throw "Unable to find access id.2";
     }
   } catch (error) {
+    chrome.tabs.create({ url: "https://app.factorialhr.com/"}); //No logged in, opeining web to manually log in
     throw "Unable to find access id";
+
   }
 };
 
@@ -207,7 +211,7 @@ const main = async (mode, tab) => {
     let days_to_fill = await getDaysToFill(employee_id);
     await fillDays(period_id, days_to_fill, employee_id);
     alert("Worked hours added correctly. Refreshing.");
-    chrome.tabs.create({ url: "https://app.factorialhr.com/attendance/clock-in/"+workYear+"/"+workMonth });
+    chrome.tabs.create({ url: "https://app.factorialhr.com/attendance/clock-in/monthly/"+workYear+"/"+workMonth +"/1"});
   } catch (error) {
     alert("error: " + error);
   }
